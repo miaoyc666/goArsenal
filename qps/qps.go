@@ -1,9 +1,10 @@
-package main
+package qps
 
 import (
 	"bufio"
 	"fmt"
 	"github.com/panjf2000/ants/v2"
+	"github.com/robfig/config"
 	"io"
 	"log"
 	"os"
@@ -13,6 +14,13 @@ import (
 	"time"
 	"unsafe"
 )
+
+/*
+File name    : qps.go
+Author       : miaoyc1989@hotmail.com
+Create date  : 2020/5/9 3:47 下午
+Description  : 限定qps访问接口的压测程序
+*/
 
 const (
 	CfgFieName = "cfg.ini"     //程序运行时的配置文件
@@ -128,8 +136,4 @@ func run() {
 	wg.Wait()
 	fmt.Println("process:", globalCount , totalCount)
 	fmt.Println("end")
-}
-
-func main()  {
-	run()
 }
