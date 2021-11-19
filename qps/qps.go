@@ -57,7 +57,7 @@ func GetData(fileName string) {
 	}
 }
 
-func Timer(qpsLimit int, totalCount int)  {
+func Timer(qpsLimit int, totalCount int) {
 	d := time.Duration(time.Second * 1)
 	t := time.NewTicker(d)
 	defer t.Stop()
@@ -71,7 +71,7 @@ func Timer(qpsLimit int, totalCount int)  {
 		count := 0
 		bT := time.Now()
 		for {
-			if count >= qpsLimit{
+			if count >= qpsLimit {
 				break
 			}
 			if len(globalChan) == 0 {
@@ -86,13 +86,13 @@ func Timer(qpsLimit int, totalCount int)  {
 		}
 		eT := time.Since(bT)
 		fmt.Printf("cost time is: %v\n", eT)
-		fmt.Println("process:", globalCount , totalCount)
+		fmt.Println("process:", globalCount, totalCount)
 	}
 }
 
 /*
 调用接口函数
- */
+*/
 func GetTestFunc() string {
 	return ""
 }
@@ -134,6 +134,6 @@ func run() {
 	Timer(qpsLimit, totalCount)
 	time.Sleep(time.Second * 2)
 	wg.Wait()
-	fmt.Println("process:", globalCount , totalCount)
+	fmt.Println("process:", globalCount, totalCount)
 	fmt.Println("end")
 }
