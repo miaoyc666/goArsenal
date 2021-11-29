@@ -31,9 +31,8 @@ func Run() {
 			break
 		}
 		line = strings.TrimSpace(line)
-		data := string(line)
-		category := gjson.Get(data, "category")
-		value := gjson.Get(data, "value")
+		category := gjson.Get(line, "category")
+		value := gjson.Get(line, "value")
 		fmt.Println(category, value)
 	}
 }
