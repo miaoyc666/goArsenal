@@ -11,5 +11,5 @@
 3. [version diff](./versionDiff/versionDiff.go)，版本号比较    
 4. [system](./system/system.go)，系统命令调用
 5. [file](./file/file.go)，文件操作相关
-6. [get mac addrs](./network/network.go)，获取mac地址列表
+6. [get mac addrs](./network/network.go)，获取mac地址列表，获取pci总线上真实的网卡顺序
 
