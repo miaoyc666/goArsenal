@@ -1,9 +1,7 @@
 # goArsenal
 
-
 ### goArsenal是什么
 目标是将goArsenal打造成Golang代码的武器库，要包罗万象。通用函数，代码小工具等等应有尽有
-
 
 ### 功能列表
 1. [qps test](./qps/qps.go)，限制qps测试
@@ -11,6 +9,6 @@
 3. [version diff](./versionDiff/versionDiff.go)，版本号比较    
 4. [system](./system/system.go)，系统命令调用
 5. [file](./file/file.go)，文件操作相关
-6. [get mac addrs](./network/network.go)，获取mac地址列表
+6. [get mac addrs](./network/network.go)，获取mac地址列表，获取pci总线上真实的网卡顺序
 7. [service register](./serviceRegister/serviceRegister.go), 接口对象注册
 
