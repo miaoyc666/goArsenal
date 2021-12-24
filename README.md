@@ -12,4 +12,5 @@
 4. [system](./system/system.go)，系统命令调用
 5. [file](./file/file.go)，文件操作相关
 6. [get mac addrs](./network/network.go)，获取mac地址列表
+7. [service register](./serviceRegister/serviceRegister.go), 接口对象注册
 
