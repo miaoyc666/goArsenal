@@ -38,6 +38,7 @@ var globalChan = make(chan string, 1000010)
 var wg sync.WaitGroup
 var p *ants.PoolWithFunc
 
+// GetData
 /*
 * 逐行读取文件里面的内容
 * 获取要查询的原始数据

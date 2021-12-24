@@ -1,4 +1,4 @@
-package serviceRegister
+package main
 
 import "fmt"
 
@@ -35,6 +35,9 @@ func query(dao daoTemplate) {
 
 func main() {
 	testDao := myDao{nameA: "nameA", nameB: "nameB"}
+	// 定义daoTemplate再调用时为显式调用, 不定义daoTemplate直接传入&testDao为鸭子类型隐式调用
 	var dao daoTemplate = &testDao
+	fmt.Println(&dao)
 	query(dao)
+	// query(&testDao)
 }
