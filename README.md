@@ -5,10 +5,10 @@
 
 ### 功能列表
 1. [qps test](./qps/qps.go)，限制qps测试
-2. [json parser](./json/json.go)，json解析器
+2. [json parser](./json/json.go)，json解析器，包含多种json库（标准json库、fastjson、gjson和jsonparser）解析示例
 3. [version diff](./versionDiff/versionDiff.go)，版本号比较    
 4. [system](./system/system.go)，系统命令调用
 5. [file](./file/file.go)，文件操作相关
 6. [get mac addrs](./network/network.go)，获取mac地址列表，获取pci总线上真实的网卡顺序
-7. [service register](./serviceRegister/serviceRegister.go), 接口对象注册
+7. [service register](./serviceRegister/serviceRegister.go), 接口对象注册注册，可用于业务逻辑抽象，逻辑层与io层分离
 

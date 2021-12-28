@@ -1,10 +1,10 @@
 package json
 
 /*
-File name    : json.go
+File name    : gjson.go
 Author       : miaoyc
 Create date  : 2021/11/19 11:39 下午
-Description  : 解析json示例，非官方库
+Description  : 解析json示例，tidwall/gjson库，gjson的优势是无需提前定义结构体。
 */
 
 import (
@@ -21,7 +21,7 @@ import (
 */
 
 func Run() {
-	fileName := "case.text"
+	fileName := "/home/miaoyongchao/test/case.txt"
 	f, _ := os.Open(fileName)
 	defer f.Close()
 	buf := bufio.NewReader(f)
