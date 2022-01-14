@@ -20,8 +20,8 @@ import (
 原始文件case.json为每行都是json数据的文本
 */
 
-func Run() {
-	fileName := "/home/miaoyongchao/test/case.txt"
+
+func parser1(fileName string) {
 	f, _ := os.Open(fileName)
 	defer f.Close()
 	buf := bufio.NewReader(f)
@@ -35,4 +35,9 @@ func Run() {
 		value := gjson.Get(line, "value")
 		fmt.Println(category, value)
 	}
+}
+
+func Run() {
+	fileName := "/home/miaoyongchao/test/case.txt"
+	parser1(fileName)
 }

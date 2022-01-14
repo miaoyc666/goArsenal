@@ -14,11 +14,10 @@ import (
 File name    : fastjson.go
 Author       : miaoyc
 Create date  : 2021/12/28 11:27 上午
-Description  :
+Description  : fastjson - fast JSON parser and validator for Go
 */
 
-func main() {
-	fileName := "/home/miaoyongchao/test/case.txt"
+func parser(fileName string) {
 	f, _ := os.Open(fileName)
 	defer f.Close()
 	buf := bufio.NewReader(f)
@@ -33,4 +32,9 @@ func main() {
 		fmt.Printf("Category=%s\n", v.GetStringBytes("category"))
 		fmt.Printf("Value=%d\n", v.GetInt("value"))
 	}
+}
+
+func main() {
+	fileName := "/home/miaoyongchao/test/case.txt"
+	parser(fileName)
 }

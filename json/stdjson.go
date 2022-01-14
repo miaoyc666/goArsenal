@@ -23,8 +23,7 @@ type TestStruct struct {
 	Value    int    `json:"value"`
 }
 
-func RunStdJson() {
-	fileName := "/home/miaoyongchao/test/case.txt"
+func parseJson(fileName string) {
 	var testStruct TestStruct
 	f, _ := os.Open(fileName)
 	defer f.Close()
@@ -38,4 +37,22 @@ func RunStdJson() {
 		err = json.Unmarshal([]byte(line), &testStruct)
 		fmt.Println(testStruct.Category, testStruct.Value)
 	}
+}
+
+func genJson() {
+	var testStruct TestStruct
+	testStruct.Category = "a"
+	testStruct.Value = 1000
+	line, _ := json.Marshal(testStruct)
+	fmt.Println(string(line))
+}
+
+func RunStdJson() {
+	fileName := "/Users/miaoyc/code/github/goArsenal/json/case.txt"
+	parseJson(fileName)
+}
+
+func main() {
+	RunStdJson()
+	genJson()
 }
