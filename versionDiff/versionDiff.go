@@ -20,7 +20,5 @@ func versionDiff(version1 string, version2 string) int32 {
 }
 
 func main() {
-	a := "2021.11.23.1537"
-	b := "2021.10.24.1537"
-	versionDiff(a, b)
+
 }

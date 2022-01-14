@@ -5,7 +5,7 @@ import (
 )
 
 /*
-File name    : json_test.go.go
+File name    : json_test.go
 Author       : miaoyc
 Create date  : 2022/1/14 5:44 下午
 Description  :
