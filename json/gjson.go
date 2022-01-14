@@ -21,7 +21,7 @@ import (
 */
 
 
-func parser1(fileName string) {
+func gjsonParser(fileName string) {
 	f, _ := os.Open(fileName)
 	defer f.Close()
 	buf := bufio.NewReader(f)
@@ -35,9 +35,4 @@ func parser1(fileName string) {
 		value := gjson.Get(line, "value")
 		fmt.Println(category, value)
 	}
-}
-
-func Run() {
-	fileName := "/home/miaoyongchao/test/case.txt"
-	parser1(fileName)
 }

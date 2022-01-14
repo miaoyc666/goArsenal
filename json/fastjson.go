@@ -17,7 +17,7 @@ Create date  : 2021/12/28 11:27 上午
 Description  : fastjson - fast JSON parser and validator for Go
 */
 
-func parser(fileName string) {
+func fastjsonParser(fileName string) {
 	f, _ := os.Open(fileName)
 	defer f.Close()
 	buf := bufio.NewReader(f)
@@ -32,9 +32,4 @@ func parser(fileName string) {
 		fmt.Printf("Category=%s\n", v.GetStringBytes("category"))
 		fmt.Printf("Value=%d\n", v.GetInt("value"))
 	}
-}
-
-func main() {
-	fileName := "/home/miaoyongchao/test/case.txt"
-	parser(fileName)
 }
