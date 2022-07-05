@@ -13,3 +13,18 @@
 7. [service register](./serviceRegister/serviceRegister.go), 接口对象注册注册，可用于业务逻辑抽象，逻辑层与io层分离
 8. [udp](./udp/udpClient.go), udp程序示例
 
+
+#### gotests
+```bash
+# 安装gotests
+go get -u github.com/cweill/gotests/...
+# env
+export PATH=$PATH:$GOPATH/bin
+# 生成所有测试用例
+gotests -all {$filename}
+```
+
+#### go test
+```bash
+go test -v {$testfile} {$sourcefile}
+```
