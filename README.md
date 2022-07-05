@@ -5,7 +5,7 @@
 
 ### 功能列表
 1. [qps test](./qps/qps.go)，限制qps测试
-2. [json](./json/json.go)，json操作示例，包含多种json库（标准json库、fastjson和gjson）的解析与生成示例
+2. [json](./json/)，json操作示例，包含多种json库（标准json库、fastjson和gjson）的解析与生成示例
 3. [version diff](./versionDiff/versionDiff.go)，版本号比较    
 4. [system](./system/system.go)，系统命令调用
 5. [file](./file/file.go)，文件操作相关
