@@ -27,4 +27,5 @@ gotests -all {$filename}
 #### go test
 ```bash
 go test -v {$testfile} {$sourcefile}
+go test -v {$testfile} {$sourcefile} -test.run {$test case name}
 ```
