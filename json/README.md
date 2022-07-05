@@ -5,4 +5,3 @@
 
 ##### 单元测试
 `go test -v jsonPaser_test.go fastjson.go gjson.go stdjson.go`
-`go test -v `
