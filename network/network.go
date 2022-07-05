@@ -43,7 +43,7 @@ func GetVirtualNetworkDeviceNames() ([]string, error) {
 	return blackList, nil
 }
 
-//GetPhysicalNetworkDeviceNames 获取物理网卡名称列表
+//GetPhysicalNetworkDeviceNames 获取物理网卡名称列表, 相关命令：ls /sys/class/net/ | grep -v "$(ls /sys/devices/virtual/net/)"
 func GetPhysicalNetworkDeviceNames() ([]string, error) {
 	output, err := system.RunSystemShell("/bin/bash", "-c", "ls /sys/class/net/ | grep -v \"$(ls /sys/devices/virtual/net/)\"")
 	if err != nil {
