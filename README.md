@@ -13,6 +13,7 @@
 7. [service register](./serviceRegister/serviceRegister.go), 接口对象注册注册，可用于业务逻辑抽象，逻辑层与io层分离
 8. [udp](./udp/udpClient.go), udp程序示例
 9. [flag](./flag/flag.go), 获取命令行参数
+10. [aes](./aes/aes.go), aes加密
 
 
 #### gotests
