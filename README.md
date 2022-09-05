@@ -14,6 +14,7 @@
 8. [udp](./udp/udpClient.go), udp程序示例
 9. [flag](./flag/flag.go), 获取命令行参数
 10. [aes](./aes/aes.go), aes加密
+11. [panic](./panic/main.go), panic 
 
 
 #### gotests
