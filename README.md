@@ -15,6 +15,8 @@
 9. [flag](./flag/flag.go), 获取命令行参数
 10. [aes](./aes/aes.go), aes加密
 
+### Go常见错误
+[Go常见错误](https://github.com/miaoyc666/go-mistakes)
 
 #### gotests
 ```bash
