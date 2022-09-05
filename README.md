@@ -16,6 +16,8 @@
 10. [aes](./aes/aes.go), aes加密
 11. [panic](./panic/main.go), panic 
 
+### Go常见错误
+[Go常见错误](https://github.com/miaoyc666/go-mistakes)
 
 #### gotests
 ```bash
