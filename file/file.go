@@ -10,10 +10,10 @@ import (
 )
 
 /*
-File name    : network.go
+File name    : file.go
 Author       : miaoyc
-Create date  : 2021/12/3 1:10 上午
-Description  : 网卡网络相关
+Create date  : 2022/9/3 1:10 上午
+Description  : 文件目录相关
 */
 
 
