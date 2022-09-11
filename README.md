@@ -3,6 +3,9 @@
 ### goArsenal是什么
 目标是将goArsenal打造成Golang代码的武器库，要包罗万象。通用函数，代码小工具等等应有尽有
 
+### 基础语法
+[基础语法](https://github.com/miaoyc666/rd-manual/tree/main/Golang)
+
 ### 功能列表
 1. [qps test](./qps/qps.go)，限制qps测试
 2. [json](./json/)，json操作示例，包含多种json库（标准json库、fastjson和gjson）的解析与生成示例
