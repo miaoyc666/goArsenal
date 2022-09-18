@@ -3,9 +3,9 @@ package main
 import (
 	"bytes"
 	"crypto/aes"
+	"encoding/base64"
 	"fmt"
 	"strings"
-    "encoding/base64"
 )
 
 /*
@@ -34,22 +34,23 @@ func PKCS7UnPadding(origData []byte) []byte {
 }
 
 // EcbDecrypt ecb解密
-func EcbDecrypt(data, key []byte) string {
-    decodeData, _ := base64.StdEncoding.DecodeString(string(data))
+func EcbDecrypt(data, key []byte) ([]byte, error) {
 	block, _ := aes.NewCipher(key)
-	decrypted := make([]byte, len(decodeData))
+	decrypted := make([]byte, len(data))
 	size := block.BlockSize()
 
-	for bs, be := 0, size; bs < len(decodeData); bs, be = bs+size, be+size {
+	for bs, be := 0, size; bs < len(data); bs, be = bs+size, be+size {
 		block.Decrypt(decrypted[bs:be], data[bs:be])
 	}
-
-	return string(PKCS7UnPadding(decrypted))
+	return PKCS7UnPadding(decrypted), nil
 }
 
 // EcbEncrypt ecb加密
-func EcbEncrypt(data, key []byte) string {
-	block, _ := aes.NewCipher(key)
+func EcbEncrypt(data, key []byte) ([]byte, error) {
+	block, err := aes.NewCipher(key)
+	if err != nil {
+		return nil, err
+	}
 	data = PKCS7Padding(data, block.BlockSize())
 	decrypted := make([]byte, len(data))
 	size := block.BlockSize()
@@ -57,7 +58,20 @@ func EcbEncrypt(data, key []byte) string {
 	for bs, be := 0, size; bs < len(data); bs, be = bs+size, be+size {
 		block.Encrypt(decrypted[bs:be], data[bs:be])
 	}
-    return base64.StdEncoding.EncodeToString(decrypted)
+	return decrypted, nil
+}
+
+func B64Encode(src []byte) string {
+	return base64.StdEncoding.EncodeToString(src)
+}
+
+func B64Decode(src string) ([]byte, error) {
+	s, err := base64.StdEncoding.DecodeString(src)
+	if err != nil {
+		return s, err
+	} else {
+		return s, nil
+	}
 }
 
 func main() {
@@ -65,11 +79,21 @@ func main() {
 	r := keyPad(key)
 	fmt.Println(r)
 
-	source := "this is data"
-	fmt.Println("source data: ", source)
-	fmt.Println("### ecb mode")
-	s := EcbEncrypt([]byte(source), []byte(r))
-	fmt.Println("Encrypt: ", s)
-	a := EcbDecrypt([]byte(s), []byte(r))
-	fmt.Println("Decrypt", string(a))
+	//source := "miaoyc"
+	//fmt.Println("source data: ", source)
+	//fmt.Println("### ecb mode")
+	//s1, _ := EcbEncrypt([]byte(source), []byte(r))
+	//fmt.Println("Encrypt: ", string(s1))
+	//b2, _ := EcbDecrypt(s1, []byte(r))
+	//fmt.Println("Decrypt: ", string(b2))
+
+	// base64
+    a := "ymD7cJgkR8DP6dwxb4Ztag=="
+	data, err := B64Decode(a)
+	if err != nil {
+	    fmt.Println("error:", err)
+		return
+	}
+	b3, _ := EcbDecrypt(data, []byte(r))
+	fmt.Println("Decrypt: ", string(b3))
 }
