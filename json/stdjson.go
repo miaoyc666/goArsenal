@@ -31,6 +31,9 @@ func parseStdJson(fileName string) {
 	for {
 		line, err := buf.ReadString('\n')
 		if err != nil || io.EOF == err {
+		    line = strings.TrimSpace(line)
+		    err = json.Unmarshal([]byte(line), &testStruct)
+		    fmt.Println(testStruct.Category, testStruct.Value)
 			break
 		}
 		line = strings.TrimSpace(line)
