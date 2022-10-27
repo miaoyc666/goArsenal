@@ -1,6 +1,6 @@
 # goArsenal
 
-### goArsenal是什么
+### What is goArsenal?
 目标是将goArsenal打造成Golang代码的武器库，要包罗万象。通用函数，代码小工具等等应有尽有
 
 ### 基础语法
