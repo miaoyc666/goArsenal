@@ -34,8 +34,8 @@ export PATH=$PATH:$GOPATH/bin
 gotests -all {$filename}
 ```
 
-#### go test
-```bash
-go test -v {$testfile} {$sourcefile}
-go test -v {$testfile} {$sourcefile} -test.run {$test case name}
-```
+##### Unit Testing, use go test
+test file:
+`go test -v xxx_test.go xxx.go`
+test single function:
+`go test -v xxx_test.go xxx.go -test.run TestXxx`
