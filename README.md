@@ -35,7 +35,7 @@ gotests -all {$filename}
 ```
 
 ##### Unit Testing, use go test
-test file:
+- test file:
 `go test -v xxx_test.go xxx.go`
-test single function:
+- test single function:
 `go test -v xxx_test.go xxx.go -test.run TestXxx`
