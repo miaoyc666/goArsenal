@@ -88,7 +88,7 @@ func main() {
 	//fmt.Println("Decrypt: ", string(b2))
 
 	// base64
-    a := "ymD7cJgkR8DP6dwxb4Ztag=="
+	a := "ymD7cJgkR8DP6dwxb4Ztag=="
 	data, err := B64Decode(a)
 	if err != nil {
 	    fmt.Println("error:", err)
