@@ -15,7 +15,6 @@ Create date  : 2021/12/2 2:24 下午
 Description  : 网卡网络相关
 */
 
-
 //GetAllNetworkDeviceAddrs 获取所有网卡的设备地址
 func GetAllNetworkDeviceAddrs() (macAddrs []string) {
 	netInterfaces, err := net.Interfaces()
@@ -83,7 +82,7 @@ func getIfIdList() ([]string, error) {
 	业务流程：
 	1.首先判断服务器是物理机还是虚拟机，物理机会存在/sys/bus/pci/devices/{ifId}/net目录, virtio虚拟机不存在该目录
 	2.根据服务器类型，取不同位置的address文件中的mac地址
- */
+*/
 func getMacById(ifId string) (string, error) {
 	dirPath := fmt.Sprintf("/sys/bus/pci/devices/%s/net", ifId)
 	queryMac := ""
@@ -99,4 +98,19 @@ func getMacById(ifId string) (string, error) {
 	output = strings.TrimSpace(output)
 	macList := strings.Split(output, "\n")
 	return macList[0], nil
+}
+
+// IsIp 是否是IP
+func IsIp(ip string) (bool, string) {
+	address := net.ParseIP(ip)
+	if address != nil {
+		if address.To4() != nil {
+			return true, "ipv4"
+		}
+		if address.To16() != nil {
+			return true, "ipv6"
+		}
+		return false, ""
+	}
+	return false, ""
 }
