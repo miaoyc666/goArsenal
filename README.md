@@ -20,17 +20,18 @@
 11. [panic](./panic/main.go), panic 
 12. [chan](./chan/chan.go), chan 
 13. [mongo](./mongo/main.go), mongodb写入与读取 
+14. [re](./re/re.go), regexp and regexp2
 
 ### Go常见错误
 [Go常见错误](https://github.com/miaoyc666/go-mistakes)
 
 #### gotests
 ```bash
-# 安装gotests
+# install gotests
 go get -u github.com/cweill/gotests/...
-# env
+# export env
 export PATH=$PATH:$GOPATH/bin
-# 生成所有测试用例
+# generate all test cases
 gotests -all {$filename}
 ```
 
@@ -38,4 +39,5 @@ gotests -all {$filename}
 ```bash
 go test -v {$testfile} {$sourcefile}
 go test -v {$testfile} {$sourcefile} -test.run {$test case name}
+go test -bench=. {$testfile} {$sourcefile} 
 ```
