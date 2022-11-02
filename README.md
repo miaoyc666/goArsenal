@@ -21,6 +21,7 @@
 12. [chan](./chan/chan.go), chan 
 13. [mongo](./mongo/main.go), mongodb写入与读取 
 14. [re](./re/re.go), regexp and regexp2
+15. [orm](./orm/README.md), orm
 
 ### Go常见错误
 [Go常见错误](https://github.com/miaoyc666/go-mistakes)
