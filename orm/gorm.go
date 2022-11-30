@@ -12,6 +12,11 @@ type Product struct {
 	Price uint
 }
 
+func (Product) TableName() string {
+	return "myProduct"
+}
+
+
 /*
 	连接
 	dsn := "host=localhost user=gorm password=gorm dbname=gorm port=9920 sslmode=disable TimeZone=Asia/Shanghai"
