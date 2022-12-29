@@ -1,12 +1,8 @@
 package file
 
 import (
-	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
-	"path"
-	"strings"
 )
 
 /*
@@ -16,10 +12,10 @@ Create date  : 2022/9/3 1:10 上午
 Description  : 文件目录相关
 */
 
-
 /*
-	判断文件是否存在
-	如果文件存在返回true,否则返回false
+FileExists
+判断文件是否存在
+如果文件存在返回true,否则返回false
 */
 func FileExists(filePath string) bool {
 	_, err := os.Stat(filePath) // os.Stat获取文件信息
@@ -109,32 +105,4 @@ func IsDir(path string) bool {
 // IsFile 判断所给路径是否为文件
 func IsFile(path string) bool {
 	return !IsDir(path)
-}
-
-/*
-	检查文件名中是否包含指定的关键字
-	file_name 文件原始名称
-	key_name  关键字
-	函数返回结果为布尔值 true 表示包含,false 表示不包含
-*/
-func CheckKeyWords(fileName, keyName string) bool {
-	return strings.Contains(fileName, keyName)
-}
-
-/*
-	遍历指定的文件夹，删除指定的文件
-	dstPath 目标目录
-	fileName 不用删除的文件名称
-*/
-func DeleteFileByDir(dstPath string, fileName string) {
-	files, _ := ioutil.ReadDir(dstPath)
-	fmt.Printf("fileName is %s\n", fileName)
-	for _, file := range files {
-		datFile := path.Join(dstPath, file.Name())
-		fmt.Printf("datFile is %s\n", datFile)
-		if datFile != fileName {
-			// fmt.Printf("datFile is %s\n",datFile)
-			os.Remove(datFile)
-		}
-	}
 }
