@@ -25,7 +25,7 @@
 16. [version diff](./versionDiff/versionDiff.go)，版本号比较
 
 ### Go常见错误
-[Go常见错误](https://github.com/miaoyc666/go-mistakes)
+[go-mistakes](https://github.com/miaoyc666/go-mistakes)
 
 #### gotests
 ```bash
