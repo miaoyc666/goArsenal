@@ -27,7 +27,7 @@
 ### Go常见错误
 [go-mistakes](https://github.com/miaoyc666/go-mistakes)
 
-#### gotests
+### gotests
 ```bash
 # install gotests
 go get -u github.com/cweill/gotests/...
@@ -37,7 +37,7 @@ export PATH=$PATH:$GOPATH/bin
 gotests -all {$filename}
 ```
 
-#### Unit Testing, use go test
+### Unit Testing, use go test
 - test file  
 `go test -v {$testfile} {$sourcefile}`
 - test single function  
