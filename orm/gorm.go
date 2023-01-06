@@ -8,8 +8,8 @@ import (
 
 type Product struct {
 	gorm.Model
-	Code  string
-	Price uint
+	Code  string string `gorm:"column:code"`
+	Price uint string `gorm:"column:price"`
 }
 
 func (Product) TableName() string {
