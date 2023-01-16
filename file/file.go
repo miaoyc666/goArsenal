@@ -1,8 +1,10 @@
 package file
 
 import (
+	"bufio"
 	"io"
 	"os"
+	"sync"
 )
 
 /*
@@ -12,12 +14,16 @@ Create date  : 2022/9/3 1:10 上午
 Description  : 文件目录相关
 */
 
+var (
+	lock sync.Mutex
+)
+
 /*
-FileExists
+IsExists
 判断文件是否存在
 如果文件存在返回true,否则返回false
 */
-func FileExists(filePath string) bool {
+func IsExists(filePath string) bool {
 	_, err := os.Stat(filePath) // os.Stat获取文件信息
 	if err != nil {
 		if os.IsExist(err) {
@@ -28,17 +34,27 @@ func FileExists(filePath string) bool {
 	return true
 }
 
-// FileSize 获取文件大小
-func FileSize(filePath string) int64 {
+// IsDir 判断所给路径是否为文件夹
+func IsDir(path string) bool {
+	s, err := os.Stat(path)
+	if err != nil {
+		return false
+	}
+	return s.IsDir()
+}
+
+// IsFile 判断所给路径是否为文件
+func IsFile(path string) bool {
+	return !IsDir(path)
+}
+
+// GetSize 获取文件大小
+func GetSize(filePath string) int64 {
 	fileInfo, err := os.Stat(filePath)
 	if err != nil {
 		return 0
 	}
 	return fileInfo.Size()
-}
-
-func DeleteFile(fileName string) {
-	os.Remove(fileName)
 }
 
 // CopyFile 拷贝文件
@@ -93,16 +109,27 @@ func BatchCreateDir(pathList ...string) {
 	}
 }
 
-// IsDir 判断所给路径是否为文件夹
-func IsDir(path string) bool {
-	s, err := os.Stat(path)
+// SaveFile 保存文件
+func SaveFile(filePath, content string) error {
+	lock.Lock()
+	defer lock.Unlock()
+	fileHandle, err := os.OpenFile(filePath, os.O_WRONLY|os.O_TRUNC|os.O_CREATE, 0666)
 	if err != nil {
-		return false
+		return err
 	}
-	return s.IsDir()
+	defer fileHandle.Close()
+	// NewWriter 默认缓冲区大小是 4096
+	// 需要使用自定义缓冲区的writer 使用 NewWriterSize()方法
+	buf := bufio.NewWriterSize(fileHandle, len(content))
+	buf.WriteString(content)
+	err = buf.Flush()
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
-// IsFile 判断所给路径是否为文件
-func IsFile(path string) bool {
-	return !IsDir(path)
+// DeleteFile 删除文件
+func DeleteFile(filePath string) {
+	os.Remove(filePath)
 }

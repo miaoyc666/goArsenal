@@ -10,7 +10,7 @@ Update Date  : 2022/12/29 11:23
 Description  :
 */
 
-func TestFileExists(t *testing.T) {
+func TestIsExists(t *testing.T) {
 	type args struct {
 		filePath string
 	}
@@ -25,9 +25,49 @@ func TestFileExists(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := FileExists(tt.args.filePath); got != tt.want {
-				t.Errorf("FileExists() = %v, want %v", got, tt.want)
+			if got := IsExists(tt.args.filePath); got != tt.want {
+				t.Errorf("IsExists() = %v, want %v", got, tt.want)
 			}
+		})
+	}
+}
+
+func TestSaveFile(t *testing.T) {
+	type args struct {
+		filePath string
+		content  string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantErr bool
+	}{
+		// TODO: Add test cases.
+		{"save-file-1", args{"./test.md", "miaoyc no.1"}, false},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if err := SaveFile(tt.args.filePath, tt.args.content); (err != nil) != tt.wantErr {
+				t.Errorf("SaveFile() error = %v, wantErr %v", err, tt.wantErr)
+			}
+		})
+	}
+}
+
+func TestDeleteFile(t *testing.T) {
+	type args struct {
+		filePath string
+	}
+	tests := []struct {
+		name string
+		args args
+	}{
+		// TODO: Add test cases.
+		{"delete file-1", args{"./test.md"}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			DeleteFile(tt.args.filePath)
 		})
 	}
 }
