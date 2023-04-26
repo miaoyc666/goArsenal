@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/lib/pq"
 	"gorm.io/driver/postgres"
 	_ "gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -8,14 +9,14 @@ import (
 
 type Product struct {
 	gorm.Model
-	Code  string string `gorm:"column:code"`
-	Price uint string `gorm:"column:price"`
+	Code  string         `gorm:"column:code"`
+	Price uint           `gorm:"column:price"`
+	Tag   pq.StringArray `gorm:"column:tag;type:text[]"`
 }
 
 func (Product) TableName() string {
 	return "myProduct"
 }
-
 
 /*
 	连接
