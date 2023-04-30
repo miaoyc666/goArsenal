@@ -12,24 +12,25 @@ import (
 	"fmt"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 )
 
 var (
 	PGClient *gorm.DB
 )
 
-// 最大连接数
-MAX_CONNECTION = 10000
+// MaxConnection 最大连接数
+var MaxConnection = 10000
 
-// 最大空闲连接数
-MAX_IDLE_CONNECTION = 1000
+// MaxIdleConnection 最大空闲连接数
+var MaxIdleConnection = 1000
 
 // InitPGConnection 初始化pg连接
 func InitPGConnection(host, port, user, password string) {
 	PGClient, _ = getPGClient(host, port, user, password)
 	sqlDB, _ := PGClient.DB()
-	sqlDB.SetMaxIdleConns(MAX_CONNECTION)
-	sqlDB.SetMaxOpenConns(MAX_IDLE_CONNECTION)
+	sqlDB.SetMaxIdleConns(MaxConnection)
+	sqlDB.SetMaxOpenConns(MaxIdleConnection)
 }
 
 // getPGClient 获取pg客户端
