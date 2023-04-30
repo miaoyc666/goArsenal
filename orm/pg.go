@@ -42,6 +42,6 @@ func getPGClient(host, port, user, password string) (*gorm.DB, error) {
 		return nil, err
 	}
 	// 关闭gorm的默认打印日志
-	// db.Logger = logger.Default.LogMode(logger.Silent)
+	db.Logger = logger.Default.LogMode(logger.Silent)
 	return db, nil
 }
