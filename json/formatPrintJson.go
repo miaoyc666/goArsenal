@@ -1,10 +1,8 @@
-package main
+package json
 
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"os"
 	"strings"
 )
 
@@ -16,16 +14,13 @@ Update Date  : 2022/11/9 15:01
 Description  :
 */
 
-func main() {
-	s := os.Args[1]
+func FormatPrintJson(s string) (string, error) {
 	s1 := strings.Replace(s, `\"`, `"`, -1)
 	var prettyJSON bytes.Buffer
 	err := json.Indent(&prettyJSON, []byte(s1), "", "\t")
 	if err != nil {
-		fmt.Println("JSON parse error: ", err)
-		fmt.Println(s1)
-		return
+		return "", err
 	}
-	fmt.Println(string(prettyJSON.Bytes()))
+	formatJson := string(prettyJSON.Bytes())
+	return formatJson, nil
 }
-
