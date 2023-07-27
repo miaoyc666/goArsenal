@@ -16,7 +16,7 @@
 4. [download](./download/download.go), download file
 5. [file](./file/file.go)，文件操作相关
 6. [flag](./flag/flag.go), 获取命令行参数
-7. [json](./json/)，json操作示例，包含多种json库（标准json库、fastjson和gjson）的解析与生成示例
+7. [json](./json), json操作示例，包含多种json库（标准json库、fastjson和gjson）的解析与生成示例
 8. [mac addr](./network/network.go)，获取mac地址列表，获取pci总线上真实的网卡顺序
 9. [mongo](./mongo/main.go), mongodb写入与读取
 10. [orm](./orm/README.md), orm
