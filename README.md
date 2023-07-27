@@ -25,6 +25,11 @@
 16. [udp](./udp/udpClient.go), udp程序示例
 17. [version diff](./versionDiff/versionDiff.go)，版本号比较
 
+### 函数列表
+#### logger函数列表
+- Setup 设置日志模块配置
+- Debug/Info/Warn/Error...
+
 ### Go常见错误
 [go-mistakes](https://github.com/miaoyc666/go-mistakes)
 
