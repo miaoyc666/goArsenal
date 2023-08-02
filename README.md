@@ -13,23 +13,28 @@
 1. [aes](aes/aes.go), aes ecb加解密示例，包含base64转换，对应的python版本[aes.py](https://github.com/miaoyc666/pyArsenal/blob/master/aes.py)
 2. [array](array/array.go), 数组相关操作
 3. [chan](chan/chan.go), chan
-4. [download](download/download.go), download file
-5. [file](file/file.go)，文件操作相关
-6. [flag](flag/flag.go), 获取命令行参数
-7. [http](http/http.go): http客户端
-8. [json](json), json操作示例，包含多种json库（标准json库、fastjson和gjson）的解析与生成示例
-9. [mac addr](network/network.go)，获取mac地址列表，获取pci总线上真实的网卡顺序
-10. [mongo](mongo/main.go), mongodb写入与读取
-11. [orm](orm/README.md), orm
-12. [panic](panic/main.go), panic 
-13. [qps test](qps/qps.go)，限制qps测试
-14. [re](re/re.go), regexp and regexp2
-15. [service register](serviceRegister/serviceRegister.go), 接口对象注册注册，可用于业务逻辑抽象，逻辑层与io层分离
-16. [system](system/system.go)，系统命令调用
-17. [udp](udp/udpClient.go), udp程序示例
-18. [version diff](versionDiff/versionDiff.go)，版本号比较
+4. [crypto](crypto/md5.go), 字符串加密
+5. [download](download/download.go), download file
+6. [file](file/file.go)，文件操作相关
+7. [flag](flag/flag.go), 获取命令行参数
+8. [http](http/http.go): http客户端
+9. [json](json), json操作示例，包含多种json库（标准json库、fastjson和gjson）的解析与生成示例
+10. [mac addr](network/network.go)，获取mac地址列表，获取pci总线上真实的网卡顺序
+11. [mongo](mongo/main.go), mongodb写入与读取
+12. [orm](orm/README.md), orm
+13. [panic](panic/main.go), panic 
+14. [qps test](qps/qps.go)，限制qps测试
+15. [re](re/re.go), regexp and regexp2
+16. [service register](serviceRegister/serviceRegister.go), 接口对象注册注册，可用于业务逻辑抽象，逻辑层与io层分离
+17. [system](system/system.go)，系统命令调用
+18. [udp](udp/udpClient.go), udp程序示例
+19. [version diff](versionDiff/versionDiff.go)，版本号比较
 
 ### 函数列表
+#### crypt函数列表
+- Md5 获取字符串md5
+- MD5sumFromFile 计算文件md5
+
 #### logger函数列表
 - Setup 设置日志模块配置
 - Debug/Info/Warn/Error...
