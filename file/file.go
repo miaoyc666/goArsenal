@@ -2,6 +2,7 @@ package file
 
 import (
 	"bufio"
+	"errors"
 	"io"
 	"os"
 	"sync"
@@ -19,11 +20,11 @@ var (
 )
 
 /*
-IsExists
+IsFileExists
 判断文件是否存在
 如果文件存在返回true,否则返回false
 */
-func IsExists(filePath string) bool {
+func IsFileExists(filePath string) bool {
 	_, err := os.Stat(filePath) // os.Stat获取文件信息
 	if err != nil {
 		if os.IsExist(err) {
@@ -32,6 +33,18 @@ func IsExists(filePath string) bool {
 		return false
 	}
 	return true
+}
+
+// IsDirExists 判断文件夹是否存在， 先判断是否存在，后判断是否是文件夹
+func IsDirExists(folderPath string) (bool, error) {
+	_, err := os.Stat(folderPath)
+	if os.IsNotExist(err) {
+		return false, err
+	}
+	if IsDir(folderPath) {
+		return true, nil
+	}
+	return false, errors.New("not folder")
 }
 
 // IsDir 判断所给路径是否为文件夹
@@ -78,21 +91,9 @@ func CopyFile(src, des string) (written int64, err error) {
 	return io.Copy(desFile, srcFile)
 }
 
-// PathExists 判断路径是否存在
-func PathExists(path string) (bool, error) {
-	_, err := os.Stat(path)
-	if err == nil {
-		return true, nil
-	}
-	if os.IsNotExist(err) {
-		return false, nil
-	}
-	return false, err
-}
-
 // CreateDir 创建目录
 func CreateDir(path string) error {
-	exist, _ := PathExists(path)
+	exist, _ := IsDirExists(path)
 	if !exist {
 		err := os.Mkdir(path, os.ModePerm)
 		if err != nil {
@@ -132,4 +133,23 @@ func SaveFile(filePath, content string) error {
 // DeleteFile 删除文件
 func DeleteFile(filePath string) {
 	os.Remove(filePath)
+}
+
+// DeleteDir 删除文件夹
+func DeleteDir(folderPath string) error {
+	exist, err := IsDirExists(folderPath)
+	if !exist || err != nil {
+		return err
+	}
+
+	err = os.RemoveAll(folderPath)
+	if err != nil {
+		return err
+	}
+
+	err = os.Mkdir(folderPath, os.ModePerm)
+	if err != nil {
+		return err
+	}
+	return nil
 }
