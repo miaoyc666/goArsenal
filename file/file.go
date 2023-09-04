@@ -19,20 +19,16 @@ var (
 	lock sync.Mutex
 )
 
-/*
-IsFileExists
-判断文件是否存在
-如果文件存在返回true,否则返回false
-*/
-func IsFileExists(filePath string) bool {
-	_, err := os.Stat(filePath) // os.Stat获取文件信息
-	if err != nil {
-		if os.IsExist(err) {
-			return true
-		}
-		return false
+// IsFileExists 判断文件是否存在, 如果文件存在返回true,否则返回false
+func IsFileExists(filePath string) (bool, error) {
+	_, err := os.Stat(filePath)
+	if os.IsNotExist(err) {
+		return false, err
 	}
-	return true
+	if IsFile(filePath) {
+		return true, nil
+	}
+	return false, errors.New("not file")
 }
 
 // IsDirExists 判断文件夹是否存在， 先判断是否存在，后判断是否是文件夹
@@ -135,8 +131,8 @@ func DeleteFile(filePath string) {
 	os.Remove(filePath)
 }
 
-// DeleteDir 删除文件夹
-func DeleteDir(folderPath string) error {
+// ClearDir 删除文件夹内的数据，不删除文件夹
+func ClearDir(folderPath string) error {
 	exist, err := IsDirExists(folderPath)
 	if !exist || err != nil {
 		return err
@@ -151,5 +147,20 @@ func DeleteDir(folderPath string) error {
 	if err != nil {
 		return err
 	}
+	return nil
+}
+
+// DeleteDir 删除文件夹
+func DeleteDir(folderPath string) error {
+	exist, err := IsDirExists(folderPath)
+	if !exist || err != nil {
+		return err
+	}
+
+	err = os.RemoveAll(folderPath)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }

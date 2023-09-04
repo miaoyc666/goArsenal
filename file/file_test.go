@@ -10,28 +10,6 @@ Update Date  : 2022/12/29 11:23
 Description  :
 */
 
-func TestIsExists(t *testing.T) {
-	type args struct {
-		filePath string
-	}
-	tests := []struct {
-		name string
-		args args
-		want bool
-	}{
-		// TODO: Add test cases.
-		{"fileExist-1", args{"./file.go"}, true},
-		{"fileExist-2", args{"./file1.go"}, false},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := IsFileExists(tt.args.filePath); got != tt.want {
-				t.Errorf("IsFileExists() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
-
 func TestSaveFile(t *testing.T) {
 	type args struct {
 		filePath string
@@ -101,6 +79,56 @@ func TestIsDirExists(t *testing.T) {
 	}
 }
 
+func TestClearDir(t *testing.T) {
+	type args struct {
+		folderPath string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantErr bool
+	}{
+		// TODO: Add test cases.
+		{"clear file", args{"/Users/miaoyongchao/code/github/goArsenal/tmp/1"}, true},
+		{"clear folder", args{"/Users/miaoyongchao/code/github/goArsenal/tmp"}, false},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if err := ClearDir(tt.args.folderPath); (err != nil) != tt.wantErr {
+				t.Errorf("DeleteDir() error = %v, wantErr %v", err, tt.wantErr)
+			}
+		})
+	}
+}
+
+func TestIsFileExists(t *testing.T) {
+	type args struct {
+		filePath string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		want    bool
+		wantErr bool
+	}{
+		// TODO: Add test cases.
+		{"fileExist-1", args{"/Users/miaoyongchao/code/github/goArsenal/tmp/1"}, true, false},
+		{"fileExist-2", args{"/Users/miaoyongchao/code/github/goArsenal/tmp"}, false, true},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := IsFileExists(tt.args.filePath)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("IsFileExists() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if got != tt.want {
+				t.Errorf("IsFileExists() got = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 func TestDeleteDir(t *testing.T) {
 	type args struct {
 		folderPath string
@@ -111,8 +139,8 @@ func TestDeleteDir(t *testing.T) {
 		wantErr bool
 	}{
 		// TODO: Add test cases.
-		{"delete file", args{"/Users/miaoyongchao/code/github/goArsenal/tmp/1"}, true},
-		{"delete folder", args{"/Users/miaoyongchao/code/github/goArsenal/tmp"}, false},
+		{"delete-1", args{"/Users/miaoyongchao/code/github/goArsenal/tmp"}, false},
+		{"delete-2", args{"/Users/miaoyongchao/code/github/goArsenal/tmp1"}, true},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
