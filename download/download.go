@@ -37,7 +37,10 @@ func NormalFileDownload(url string) {
 
 // ProxyFileDownload 支持设置代理和超时时间下载文件
 func ProxyFileDownload(url, path, fileName, proxy string, timeout int) error {
-	os.MkdirAll(path, 0777)
+	err := os.MkdirAll(path, 0777)
+	if err != nil {
+		return err
+	}
 	downFile := path + "/" + fileName
 	tr := &http.Transport{
 		TLSClientConfig:   &tls.Config{InsecureSkipVerify: true},
