@@ -1,6 +1,6 @@
 module github.com/miaoyc666/goArsenal
 
-go 1.20
+go 1.21
 
 require (
 	github.com/dlclark/regexp2 v1.7.0
