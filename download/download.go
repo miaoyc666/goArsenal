@@ -32,7 +32,10 @@ func NormalFileDownload(url string) {
 		panic(err)
 
 	}
-	io.Copy(f, res.Body)
+	_, err = io.Copy(f, res.Body)
+	if err != nil {
+		return
+	}
 }
 
 // ProxyFileDownload 支持设置代理和超时时间下载文件
