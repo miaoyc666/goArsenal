@@ -17,8 +17,8 @@ import (
 
 /*
 File name    : qps.go
-Author       : miaoyc1989@hotmail.com
-Create date  : 2020/5/9 3:47 下午
+Author       : miaoyc
+Create date  : 2023/6/13 11:35
 Description  : 限定qps访问接口的压测程序
 */
 
@@ -91,16 +91,12 @@ func Timer(qpsLimit int, totalCount int) {
 	}
 }
 
-/*
-调用接口函数
-*/
+// GetTestFunc 调用接口函数
 func GetTestFunc() string {
 	return ""
 }
 
-/*
-反序列化数据函数预留
-*/
+// Unmarshal 反序列化数据函数预留
 func Unmarshal(data unsafe.Pointer) int {
 	return 0
 }

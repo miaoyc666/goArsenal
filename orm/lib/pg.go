@@ -46,3 +46,15 @@ func getPGClient(host, port, user, password string) (*gorm.DB, error) {
 	db.Logger = logger.Default.LogMode(logger.Silent)
 	return db, nil
 }
+
+// CountTable 表计数
+func CountTable(tableName string) (int64, error) {
+	var results []int64
+	sql := fmt.Sprintf("SELECT count(*) as total FROM %s", tableName)
+	db := lib.PGClient.Raw(sql).Scan(&results)
+	if db.Error != nil {
+		return 0, db.Error
+	}
+	return results[0], nil
+}
+

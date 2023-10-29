@@ -1,0 +1,9 @@
+auth:
+  mid: xxx
+  token: xxx
+data:
+  downloadPath: "/tmp"
+upgrade:
+  httpProxy: "http://127.0.0.1:10808"
+
+
