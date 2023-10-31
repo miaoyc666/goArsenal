@@ -12,6 +12,8 @@ import (
 	"os"
 	"path"
 	"time"
+
+	miaoycHttp "github.com/miaoyc666/goArsenal/http"
 )
 
 /*
@@ -20,17 +22,6 @@ Author       : miaoyc
 Create Date  : 2022/12/29 11:17
 Update Date  : 2023/10/30 5:47
 Description  : */
-
-type TransportParams struct {
-	Proxy              string
-	CaCertFile         string
-	InsecureSkipVerify bool
-	Timeout            int
-}
-
-func NewTransportParams() *TransportParams {
-	return &TransportParams{InsecureSkipVerify: true, Timeout: 10}
-}
 
 // NormalFileDownload 普通下载文件
 func NormalFileDownload(url string) {
@@ -71,7 +62,7 @@ func loadCACert(caCertFile string) (*x509.CertPool, error) {
 //	@param fileName 下载文件名称
 //	@param params 下载参数
 //	@return error
-func ProxyFileDownload(url, path, fileName string, params TransportParams) error {
+func ProxyFileDownload(url, path, fileName string, params miaoycHttp.TransportParams) error {
 	// 预创建目录
 	err := os.MkdirAll(path, 0777)
 	if err != nil {

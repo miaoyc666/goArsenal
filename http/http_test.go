@@ -16,20 +16,23 @@ Description  :
 
 func TestNewHttpClient(t *testing.T) {
 	type args struct {
-		proxy               string
-		insecureSkipVerify_ bool
+		params TransportParams
 	}
+	params := NewTransportParams()
+	params.Proxy = "https://proxy.happycode.fun:3129"
+	params.CaCertFile = "/Users/miaoyc/tmp/proxy.happycode.fun.pem"
+
 	tests := []struct {
 		name string
 		args args
 		want *http.Client
 	}{
 		// TODO: Add test cases.
-		{"new client", args{"192.168.88.100:7890", true}, nil},
+		{"new client", args{*params}, nil},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := NewHttpClient(tt.args.proxy, tt.args.insecureSkipVerify_); !reflect.DeepEqual(got, tt.want) {
+			if got := NewHttpClient(tt.args.params); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("NewHttpClient() = %v, want %v", got, tt.want)
 			}
 		})

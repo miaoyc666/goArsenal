@@ -1,6 +1,9 @@
 package download
 
-import "testing"
+import (
+	miaoycHttp "github.com/miaoyc666/goArsenal/http"
+	"testing"
+)
 
 /*
 File name    : download_test.go
@@ -33,11 +36,11 @@ func TestProxyFileDownload(t *testing.T) {
 		url      string
 		path     string
 		fileName string
-		params   TransportParams
+		params   miaoycHttp.TransportParams
 	}
-	params := NewTransportParams()
+	params := miaoycHttp.NewTransportParams()
 	params.Proxy = "https://proxy.happycode.fun:3129"
-	params.CaCertFile = "/Users/wangxuan/tmp/proxy.happycode.fun.pem"
+	params.CaCertFile = "/Users/miaoyc/tmp/proxy.happycode.fun.pem"
 
 	tests := []struct {
 		name    string
