@@ -36,7 +36,7 @@ func NewHttpClient(params TransportParams) *http.Client {
 	// 自定义transport
 	if params.Proxy != "" {
 		tr = &http.Transport{
-			Proxy:             getProxy(params.Proxy),
+			Proxy:             GetProxy(params.Proxy),
 			TLSClientConfig:   &tls.Config{InsecureSkipVerify: params.InsecureSkipVerify},
 			DisableKeepAlives: true,
 			DialContext: (&net.Dialer{
@@ -55,7 +55,7 @@ func NewHttpClient(params TransportParams) *http.Client {
 
 	// 存在证书时，配置TLSClientConfig
 	if params.CaCertFile != "" {
-		caCert, err := loadCACert(params.CaCertFile)
+		caCert, err := LoadCACert(params.CaCertFile)
 		if err != nil {
 			return nil
 		}
@@ -70,8 +70,8 @@ func NewHttpClient(params TransportParams) *http.Client {
 	return client
 }
 
-// loadCACert 加载CA证书
-func loadCACert(caCertFile string) (*x509.CertPool, error) {
+// LoadCACert 加载CA证书
+func LoadCACert(caCertFile string) (*x509.CertPool, error) {
 	// 读取CA证书文件
 	caCert, err := ioutil.ReadFile(caCertFile)
 	if err != nil {
@@ -83,7 +83,8 @@ func loadCACert(caCertFile string) (*x509.CertPool, error) {
 	return caCertPool, nil
 }
 
-func getProxy(address string) func(*http.Request) (*url.URL, error) {
+// GetProxy 获取proxy
+func GetProxy(address string) func(*http.Request) (*url.URL, error) {
 	if len(address) == 0 {
 		return nil
 	}

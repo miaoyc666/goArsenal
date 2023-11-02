@@ -2,13 +2,10 @@ package download
 
 import (
 	"crypto/tls"
-	"crypto/x509"
 	"errors"
 	"io"
-	"io/ioutil"
 	"net"
 	"net/http"
-	"net/url"
 	"os"
 	"path"
 	"time"
@@ -41,19 +38,6 @@ func NormalFileDownload(url string) {
 	}
 }
 
-// loadCACert 加载CA证书
-func loadCACert(caCertFile string) (*x509.CertPool, error) {
-	// 读取CA证书文件
-	caCert, err := ioutil.ReadFile(caCertFile)
-	if err != nil {
-		return nil, err
-	}
-	// 创建CertPool并添加CA证书
-	caCertPool := x509.NewCertPool()
-	caCertPool.AppendCertsFromPEM(caCert)
-	return caCertPool, nil
-}
-
 // ProxyFileDownload 支持设置代理和超时时间下载文件，代理类型支持
 //
 //	@Description:
@@ -77,12 +61,12 @@ func ProxyFileDownload(url, path, fileName string, params miaoycHttp.TransportPa
 		DialContext: (&net.Dialer{
 			Timeout: time.Duration(params.Timeout) * time.Second,
 		}).DialContext,
-		Proxy: getProxy(params.Proxy),
+		Proxy: miaoycHttp.GetProxy(params.Proxy),
 	}
 
 	// 存在证书时，配置TLSClientConfig
 	if params.CaCertFile != "" {
-		caCert, err := loadCACert(params.CaCertFile)
+		caCert, err := miaoycHttp.LoadCACert(params.CaCertFile)
 		if err != nil {
 			return err
 		}
@@ -110,15 +94,4 @@ func ProxyFileDownload(url, path, fileName string, params miaoycHttp.TransportPa
 		return err
 	}
 	return nil
-}
-
-func getProxy(address string) func(*http.Request) (*url.URL, error) {
-	if len(address) == 0 {
-		return nil
-	}
-	proxyUrl, err := url.Parse(address)
-	if err != nil {
-		return nil
-	}
-	return http.ProxyURL(proxyUrl)
 }
