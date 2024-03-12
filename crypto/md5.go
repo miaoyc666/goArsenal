@@ -19,7 +19,9 @@ var (
 	readFileBufferSize = 65536
 )
 
-// Md5 md5加密，input: 需加密的字符串, return：加密之后的32个字符的数据
+// Md5 md5加密，
+// @data input: 需加密的字符串
+// @return：加密之后的32个字符的数据
 func Md5(data string) (md5str string) {
 	h := md5.New()
 	h.Write([]byte(data))
