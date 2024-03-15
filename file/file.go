@@ -2,6 +2,7 @@ package file
 
 import (
 	"bufio"
+	"bytes"
 	"errors"
 	"io"
 	"os"
@@ -12,7 +13,7 @@ import (
 File name    : file.go
 Author       : miaoyc
 Create date  : 2022/9/3 1:10 上午
-Description  : 文件目录相关
+Description  : 文件和目录相关
 */
 
 var (
@@ -163,4 +164,19 @@ func DeleteDir(folderPath string) error {
 	}
 
 	return nil
+}
+
+// ReadFile 读取文件内容
+func ReadFile(filePath string) (res []byte, err error) {
+	file, err := os.Open(filePath)
+	if err != nil {
+		return
+	}
+	defer file.Close()
+
+	buf := bytes.NewBuffer(nil)
+	if _, err = io.Copy(buf, file); err != nil {
+		return
+	}
+	return buf.Bytes(), nil
 }
