@@ -1,13 +1,11 @@
 package array
 
-
 /*
 File name    : array.go
 Author       : miaoyc
 Create date  : 2023/1/11 3:01 下午
-Description  : 
+Description  :
 */
-
 
 // removeDuplicateElement 元素去重
 func removeDuplicateElement(values []string) []string {
@@ -21,3 +19,5 @@ func removeDuplicateElement(values []string) []string {
 	}
 	return result
 }
+
+// todo: 合并去重
