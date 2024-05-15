@@ -33,36 +33,26 @@ func RemoveDuplicateElement(input interface{}) interface{} {
 }
 
 // MergeAndDeduplicate 合并两个数组并去除重复项
-func MergeAndDeduplicate(a, b interface{}) interface{} {
-	unique := make(map[interface{}]bool)
-
-	va := reflect.ValueOf(a)
-	vb := reflect.ValueOf(b)
-
-	for i := 0; i < va.Len(); i++ {
-		unique[va.Index(i).Interface()] = true
+func MergeAndDeduplicate[T comparable](a, b []T) []T {
+	unique := make(map[T]bool)
+	for _, item := range a {
+		unique[item] = true
 	}
-
-	for i := 0; i < vb.Len(); i++ {
-		unique[vb.Index(i).Interface()] = true
+	for _, item := range b {
+		unique[item] = true
 	}
-
-	result := reflect.MakeSlice(va.Type(), 0, len(unique))
+	result := make([]T, 0, len(unique))
 	for key := range unique {
-		result = reflect.Append(result, reflect.ValueOf(key))
+		result = append(result, key)
 	}
-
-	return result.Interface()
+	return result
 }
 
 // In 类python的in操作符
-func In(slice interface{}, elem interface{}) bool {
-	arrV := reflect.ValueOf(slice)
-	if arrV.Kind() == reflect.Slice {
-		for i := 0; i < arrV.Len(); i++ {
-			if arrV.Index(i).Interface() == elem {
-				return true
-			}
+func In[T comparable](slice []T, elem T) bool {
+	for _, item := range slice {
+		if item == elem {
+			return true
 		}
 	}
 	return false
