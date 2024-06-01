@@ -6,7 +6,7 @@ import (
 )
 
 /*
-File name    : strutil_test.go.go
+File name    : strutil_test.go
 Create time  : 2024/5/20 01:20
 Update time  : 2024/5/20 01:20
 Description  :
@@ -26,4 +26,9 @@ func TestIsMD5(t *testing.T) {
 	assert.Equal(t, s, false)
 	s = IsMD5("35a075221d7cbbcc43842cdbbbd767f8x")
 	assert.Equal(t, s, false)
+}
+
+func TestConcat(t *testing.T) {
+	str1, str2 := "xxx", "yyy"
+	assert.Equal(t, "xxxyyy", Concat(str1, str2))
 }
