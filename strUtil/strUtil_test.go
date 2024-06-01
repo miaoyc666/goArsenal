@@ -1,4 +1,4 @@
-package strutil
+package strUtil
 
 import (
 	"github.com/stretchr/testify/assert"
@@ -6,7 +6,7 @@ import (
 )
 
 /*
-File name    : strutil_test.go
+File name    : strUtil_test.go
 Create time  : 2024/5/20 01:20
 Update time  : 2024/5/20 01:20
 Description  :

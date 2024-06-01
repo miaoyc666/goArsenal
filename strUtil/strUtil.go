@@ -1,4 +1,4 @@
-package strutil
+package strUtil
 
 import (
 	"regexp"
@@ -6,7 +6,7 @@ import (
 )
 
 /*
-File name    : strutil.go
+File name    : strUtil.go
 Author       : miaoyc
 Create Date  : 2024/5/19 23:58
 Update Date  : 2024/5/19 23:58
