@@ -1,26 +1,13 @@
 package crypto
 
-import "testing"
+import (
+	"github.com/stretchr/testify/assert"
+	"testing"
+)
 
 func TestMd5(t *testing.T) {
-	type args struct {
-		data string
-	}
-	tests := []struct {
-		name       string
-		args       args
-		wantMd5str string
-	}{
-		// TODO: Add test cases.
-		{"md5", args{"miaoyc"}, "ece751dcb8e591181c83e121689cc6ba"},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if gotMd5str := Md5(tt.args.data); gotMd5str != tt.wantMd5str {
-				t.Errorf("Md5() = %v, want %v", gotMd5str, tt.wantMd5str)
-			}
-		})
-	}
+	s := Md5("miaoyc")
+	assert.Equal(t, "ece751dcb8e591181c83e121689cc6ba", s)
 }
 
 func TestMD5sumFromFile(t *testing.T) {
