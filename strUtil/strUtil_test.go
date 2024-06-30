@@ -32,3 +32,16 @@ func TestConcat(t *testing.T) {
 	str1, str2 := "xxx", "yyy"
 	assert.Equal(t, "xxxyyy", Concat(str1, str2))
 }
+
+func Test_isValidName(t *testing.T) {
+	s := IsValidName("hello-world")
+	assert.Equal(t, s, true)
+	s = IsValidName("hello-world_")
+	assert.Equal(t, s, true)
+	s = IsValidName("hello123")
+	assert.Equal(t, s, true)
+	s = IsValidName("hello)123")
+	assert.Equal(t, s, false)
+	s = IsValidName("hello 123")
+	assert.Equal(t, s, false)
+}
