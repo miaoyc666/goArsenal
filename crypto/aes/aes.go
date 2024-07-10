@@ -1,4 +1,4 @@
-package main
+package aes
 
 import (
 	"bytes"
@@ -91,7 +91,7 @@ func main() {
 	a := "ymD7cJgkR8DP6dwxb4Ztag=="
 	data, err := B64Decode(a)
 	if err != nil {
-	    fmt.Println("error:", err)
+		fmt.Println("error:", err)
 		return
 	}
 	b3, _ := EcbDecrypt(data, []byte(r))

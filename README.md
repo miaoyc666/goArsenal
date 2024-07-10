@@ -10,7 +10,7 @@
 在go.mog中引用github.com/miaoyc666/goArsenal即可使用函数库中的函数
 
 ### 功能列表
-1. [aes](aes/aes.go), aes ecb加解密示例，包含base64转换，对应的python版本[aes.py](https://github.com/miaoyc666/pyArsenal/blob/master/aes.py)
+1. [aes](crypto/aes/aes.go), aes ecb加解密示例，包含base64转换，对应的python版本[aes.py](https://github.com/miaoyc666/pyArsenal/blob/master/aes.py)
 2. [array](array/array.go), 数组相关操作
 3. [chan](chan/chan.go), chan
 4. [crypto](crypto/md5.go), 字符串加密
