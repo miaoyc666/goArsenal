@@ -12,7 +12,7 @@ import (
 File name    : md5.go
 Author       : miaoyc
 Create date  : 2021/12/2 4:34 下午
-Description  : 加密相关
+Description  : md5 hash
 */
 
 var (
