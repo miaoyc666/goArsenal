@@ -12,6 +12,9 @@ Update time  : 2024/7/11 14:06
 Description  : 填充算法
 */
 
+type PadFunc func(ciphertext []byte, blockSize int) []byte
+type UnPadFunc func(data []byte) []byte
+
 // ZeroPadding 对给定的数据进行Zero Padding填充
 // data: 需要填充的原始数据
 // blockSize: 块的大小，AES的块大小通常是16字节
@@ -22,6 +25,11 @@ func ZeroPadding(data []byte, blockSize int) []byte {
 	}
 	padding := bytes.Repeat([]byte{0}, paddingSize)
 	return append(data, padding...)
+}
+
+// ZeroUnPadding 去除零值填充
+func ZeroUnPadding(data []byte) []byte {
+	return bytes.TrimRight(data, "\x00")
 }
 
 // PKCS7Padding PKCS7进行填充
