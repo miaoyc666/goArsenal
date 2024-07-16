@@ -1,8 +1,9 @@
 package aes
 
 import (
-	"crypto/md5"
 	"crypto/rand"
+	"crypto/sha256"
+	"hash"
 	"io"
 )
 
@@ -10,12 +11,14 @@ import (
 File name    : openssl.go
 Author       : miaoyc
 Create time  : 2024/7/11 18:58
-Update time  : 2024/7/11 18:58
+Update time  : 2024/7/16 12:23
 Description  : 兼容openssl命令的加解密函数
 */
 
 const (
 	saltSize = 8
+	keyLen   = 32 // 256 bits
+	ivLen    = 16 // 128 bits
 	prefix   = "Salted__"
 )
 
@@ -29,27 +32,6 @@ func generateSalt() ([]byte, error) {
 	return salt, nil
 }
 
-// generateKeyAndIV 与openssl生成key和iv算法相同的实现
-func generateKeyAndIV(salt []byte, key string) (iv, calKey []byte) {
-	hash1 := md5.Sum([]byte(key + string(salt)))
-	hash2 := md5.Sum(append(hash1[:], []byte(key+string(salt))...))
-	hash3 := md5.Sum(append(hash2[:], []byte(key+string(salt))...))
-	calKey = append(hash1[:], hash2[:]...)
-	iv = hash3[:]
-	return
-}
-
-// getKeyAndIv 与openssl获取key和iv算法相同的实现
-func getKeyAndIv(ciphertext []byte, key string) (iv []byte, calKey []byte) {
-	salt := ciphertext[8:16]
-	hash1 := md5.Sum([]byte(key + string(salt)))
-	hash2 := md5.Sum(append(hash1[:], []byte(key+string(salt))...))
-	hash3 := md5.Sum(append(hash2[:], []byte(key+string(salt))...))
-	calKey = append(hash1[:], hash2[:]...)
-	iv = hash3[:]
-	return
-}
-
 func OpensslCbcEncrypt(plaintext []byte, password string) (finalCiphertext []byte, err error) {
 	// 生成随机salt
 	salt, saltErr := generateSalt()
@@ -58,7 +40,11 @@ func OpensslCbcEncrypt(plaintext []byte, password string) (finalCiphertext []byt
 		return
 	}
 	// 生成key和iv
-	iv, calKey := generateKeyAndIV(salt, password)
+	calKey, iv, genErr := EVPBytesToKey([]byte(password), salt, keyLen, ivLen, sha256.New)
+	if genErr != nil {
+		err = genErr
+		return
+	}
 	// 加密
 	ciphertext, encErr := CbcEncrypt(plaintext, calKey, iv, PKCS7Padding)
 	if encErr != nil {
@@ -71,9 +57,17 @@ func OpensslCbcEncrypt(plaintext []byte, password string) (finalCiphertext []byt
 	return
 }
 
+// OpensslCbcDecrypt 兼容openssl命令的解密方法
+// 相当于执行命令： echo -n "ciphertext" | openssl enc -aes-256-cbc -k xxxx -salt
 func OpensslCbcDecrypt(ciphertext []byte, password string) (plaintext []byte, err error) {
-	// 获取key和iv
-	iv, calKey := getKeyAndIv(ciphertext, password)
+	// 获取salt
+	salt := ciphertext[8:16]
+	// 生成key和iv
+	calKey, iv, genErr := EVPBytesToKey([]byte(password), salt, keyLen, ivLen, sha256.New)
+	if genErr != nil {
+		err = genErr
+		return
+	}
 	// 去除前缀与salt
 	ciphertext = ciphertext[16:]
 	// 解密
@@ -82,4 +76,27 @@ func OpensslCbcDecrypt(ciphertext []byte, password string) (plaintext []byte, er
 		return
 	}
 	return
+}
+
+// EVPBytesToKey 兼容openssl的EVP_BytesToKey方法，用于生成加密密钥和IV
+// hash算法说明：openssl默认的hash函数，从OpenSSL 1.1开始由 MD5 变为 SHA256
+func EVPBytesToKey(password, salt []byte, keyLen, ivLen int, h func() hash.Hash) ([]byte, []byte, error) {
+	var key, iv []byte
+	var data []byte
+
+	// Calculate the number of hash iterations needed
+	dLen := keyLen + ivLen
+	for len(data) < dLen {
+		h := h()
+		if len(data) > 0 {
+			h.Write(data)
+		}
+		h.Write(password)
+		h.Write(salt)
+		data = h.Sum(data)
+	}
+
+	key = data[:keyLen]
+	iv = data[keyLen : keyLen+ivLen]
+	return key, iv, nil
 }
