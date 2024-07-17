@@ -3,6 +3,7 @@ module github.com/miaoyc666/goArsenal
 go 1.21
 
 require (
+	github.com/araddon/dateparse v0.0.0-20210429162001-6b43995a97de
 	github.com/dlclark/regexp2 v1.7.0
 	github.com/jmoiron/sqlx v1.3.5
 	github.com/lestrrat-go/file-rotatelogs v2.4.0+incompatible
