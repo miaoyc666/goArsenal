@@ -5,7 +5,7 @@ import (
 	"encoding/hex"
 )
 
-func sha256Encrypt(inputString string) string {
+func Sha256Encrypt(inputString string) string {
 	// 创建一个新的sha256哈希对象
 	hasher := sha256.New()
 	// 写入要计算的数据

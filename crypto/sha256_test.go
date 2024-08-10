@@ -5,9 +5,9 @@ import (
 	"testing"
 )
 
-func Test_sha256Encrypt(t *testing.T) {
+func Test_Sha256Encrypt(t *testing.T) {
 	inputString := "Hello, SHA-256!"
-	encryptedString := sha256Encrypt(inputString)
+	encryptedString := Sha256Encrypt(inputString)
 	fmt.Printf("原始字符串: %s\n", inputString)
 	fmt.Printf("SHA-256加密后: %s\n", encryptedString)
 }
