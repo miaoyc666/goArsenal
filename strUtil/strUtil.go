@@ -3,20 +3,22 @@ package strUtil
 import (
 	"regexp"
 	"strings"
+	"unicode"
 )
 
 /*
 File name    : strUtil.go
 Author       : miaoyc
 Create Date  : 2024/5/19 23:58
-Update Date  : 2024/6/30 16:10
+Update Date  : 2024/8/13 23:49
 Description  :
 */
 
 var (
-	md5Pattern  = regexp.MustCompile(`^[a-fA-F0-9]{32}$`)
-	uuidPattern = regexp.MustCompile(`^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$`)
-	namePattern = regexp.MustCompile(`^[a-zA-Z0-9-_]+$`)
+	md5Pattern   = regexp.MustCompile(`^[a-fA-F0-9]{32}$`)
+	uuidPattern  = regexp.MustCompile(`^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$`)
+	namePattern  = regexp.MustCompile(`^[a-zA-Z0-9-_]+$`)
+	emailPattern = regexp.MustCompile(`^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}$`)
 )
 
 func Concat(str1, str2 string, strs ...string) string {
@@ -40,4 +42,27 @@ func IsMD5(str string) bool {
 // IsValidName 是否是有效的名称, 匹配数字、字母、中划线和下划线
 func IsValidName(s string) bool {
 	return namePattern.MatchString(s)
+}
+
+func IsNumeric(s string) bool {
+	for _, c := range s {
+		if !unicode.IsDigit(c) {
+			return false
+		}
+	}
+	return true
+}
+
+func IsMobile(phoneNumber string) bool {
+	if len(phoneNumber) != 11 {
+		return false
+	}
+	if phoneNumber[0] != '1' {
+		return false
+	}
+	return IsNumeric(phoneNumber)
+}
+
+func IsEmail(email string) bool {
+	return emailPattern.MatchString(email)
 }

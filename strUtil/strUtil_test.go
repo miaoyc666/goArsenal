@@ -45,3 +45,29 @@ func Test_isValidName(t *testing.T) {
 	s = IsValidName("hello 123")
 	assert.Equal(t, s, false)
 }
+
+func TestIsMobile(t *testing.T) {
+	s := IsMobile("13800138000")
+	assert.Equal(t, s, true)
+	s = IsMobile("23800138000")
+	assert.Equal(t, s, false)
+	s = IsMobile("1380013800")
+	assert.Equal(t, s, false)
+	s = IsMobile("1380013800a")
+	assert.Equal(t, s, false)
+	s = IsMobile("")
+	assert.Equal(t, s, false)
+}
+
+func TestIsEmail(t *testing.T) {
+	s := IsEmail("example@example.com")
+	assert.Equal(t, s, true)
+	s = IsEmail("example.example.com")
+	assert.Equal(t, s, false)
+	s = IsEmail("example@.com")
+	assert.Equal(t, s, false)
+	s = IsEmail("@example.com")
+	assert.Equal(t, s, false)
+	s = IsEmail("")
+	assert.Equal(t, s, false)
+}
