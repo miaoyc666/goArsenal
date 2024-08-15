@@ -2,15 +2,28 @@ package array
 
 import (
 	"reflect"
+	"encoding/json"
 )
 
 /*
 File name    : array.go
 Author       : miaoyc
 Create date  : 2023/1/11 3:01 下午
-Update date  : 2023/1/11 3:01 下午
+Update date  : 2024/8/15 12:05
 Description  : array自定义函数，使用反射的函数有一定性能损耗（非核心高性能场景可以使用）
 */
+
+
+// StructToJSON 是一个通用函数，可以将任何struct转换成JSON字符串
+// 如果转换成功，返回JSON字符串和nil
+// 如果转换失败，返回空字符串和错误信息
+func StructToJSON(v interface{}) (string, error) {
+	jsonBytes, err := json.Marshal(v)
+	if err != nil {
+		return "", err
+	}
+	return string(jsonBytes), nil
+}
 
 // RemoveDuplicateElement 元素去重
 func RemoveDuplicateElement(input interface{}) interface{} {
