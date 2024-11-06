@@ -18,7 +18,8 @@ File name    : download.go
 Author       : miaoyc
 Create Date  : 2022/12/29 11:17
 Update Date  : 2023/10/30 5:47
-Description  : */
+Description  :
+*/
 
 // NormalFileDownload 普通下载文件
 func NormalFileDownload(url string) {
