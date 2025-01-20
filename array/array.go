@@ -106,3 +106,23 @@ func SliceEqual(a, b interface{}) bool {
 	}
 	return false
 }
+
+// UnionStringSlices 合并多个字符串切片并去重
+// 参数：slices - 二维字符串切片
+// 返回值：合并并去重后的字符串切片
+// 返回结果无排序
+func UnionStringSlices(slices [][]string) []string {
+	set := make(map[string]struct{})
+	for _, slice := range slices {
+		for _, item := range slice {
+			set[item] = struct{}{}
+		}
+	}
+
+	union := make([]string, 0, len(set))
+	for item := range set {
+		union = append(union, item)
+	}
+
+	return union
+}
