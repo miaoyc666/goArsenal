@@ -126,3 +126,37 @@ func UnionStringSlices(slices [][]string) []string {
 
 	return union
 }
+
+// MergeStringSlices 合并多个字符串切片并取交集
+// 参数：slices - 二维字符串切片
+// 返回值：合并并取交集后的字符串切片
+func MergeStringSlices(slices [][]string) []string {
+	if len(slices) == 0 {
+		return []string{}
+	}
+
+	// 初始化交集集合为第一个切片的元素
+	intersection := make(map[string]struct{})
+	for _, item := range slices[0] {
+		intersection[item] = struct{}{}
+	}
+
+	// 逐个与后续切片取交集
+	for _, slice := range slices[1:] {
+		tempSet := make(map[string]struct{})
+		for _, item := range slice {
+			if _, exists := intersection[item]; exists {
+				tempSet[item] = struct{}{}
+			}
+		}
+		intersection = tempSet
+	}
+
+	// 将交集集合转换为切片
+	result := make([]string, 0, len(intersection))
+	for item := range intersection {
+		result = append(result, item)
+	}
+
+	return result
+}
