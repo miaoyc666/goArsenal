@@ -1,8 +1,8 @@
 package array
 
 import (
-	"reflect"
 	"encoding/json"
+	"reflect"
 )
 
 /*
@@ -12,7 +12,6 @@ Create date  : 2023/1/11 15:01
 Update date  : 2025/1/20 22:12
 Description  : array自定义函数，使用反射的函数有一定性能损耗（非核心高性能场景可以使用）
 */
-
 
 // StructToJSON 是一个通用函数，可以将任何struct转换成JSON字符串
 // 如果转换成功，返回JSON字符串和nil
@@ -159,4 +158,34 @@ func MergeStringSlices(slices [][]string) []string {
 	}
 
 	return result
+}
+
+// PaginateItems 通用分页函数
+func PaginateItems[T any](items []T, page, limit uint32) []T {
+	// 空数据处理
+	if len(items) == 0 {
+		return []T{}
+	}
+
+	// 参数规范化, 异常参数返回空数组，不做默认值处理
+	if page <= 0 || limit <= 0 {
+		return []T{}
+	}
+
+	// 计算分页索引
+	startIndex := (page - 1) * limit
+	endIndex := startIndex + limit
+	total := uint32(len(items))
+
+	// 处理越界情况
+	if startIndex >= total {
+		return []T{}
+	}
+
+	// 处理结束索引
+	if endIndex > total {
+		return items[startIndex:] // 返回剩余数据
+	}
+
+	return items[startIndex:endIndex] // 返回分页数据
 }

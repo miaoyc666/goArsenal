@@ -2,16 +2,17 @@ package array
 
 import (
 	"fmt"
-	"github.com/stretchr/testify/assert"
 	"reflect"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 /*
 File name    : array_test.go
 Author       : miaoyc
 Create Date  : 2024/4/23 01:36
-Update Date  : 2024/4/23 01:36
+Update Date  : 2025/4/3 19:44
 Description  :
 */
 
@@ -59,4 +60,27 @@ func TestSliceEqual(t *testing.T) {
 	strs2 := []string{"0", "1", "2"}
 	assert.Equal(t, true, SliceEqual(strs, strs1))
 	assert.Equal(t, false, SliceEqual(strs, strs2))
+}
+
+func TestPaginateItemsInt(t *testing.T) {
+	items := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+
+	got := PaginateItems(items, 3, 2)
+	expected := []int{5, 6}
+
+	if !reflect.DeepEqual(got, expected) {
+		t.Errorf("PaginateItems() = %v, want %v", got, expected)
+	}
+
+}
+
+func TestPaginateItemsString(t *testing.T) {
+	items := []string{"a", "b", "c", "d", "e"}
+
+	got := PaginateItems(items, 2, 2)
+	expected := []string{"c", "d"}
+
+	if !reflect.DeepEqual(got, expected) {
+		t.Errorf("PaginateItems() = %v, want %v", got, expected)
+	}
 }
