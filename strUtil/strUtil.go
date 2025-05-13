@@ -66,3 +66,18 @@ func IsMobile(phoneNumber string) bool {
 func IsEmail(email string) bool {
 	return emailPattern.MatchString(email)
 }
+
+// IsAllInvisibleOrSpace 判断字符串是否全部由不可见字符或空白字符组成
+func IsAllInvisibleOrSpace(s string) bool {
+	if len(s) == 0 {
+		return true
+	}
+
+	for _, r := range s {
+		// 如果存在可见字符（非空白且非控制字符），返回 false
+		if !unicode.IsSpace(r) && !unicode.IsControl(r) {
+			return false
+		}
+	}
+	return true
+}

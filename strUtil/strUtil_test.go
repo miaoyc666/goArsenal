@@ -1,8 +1,9 @@
 package strUtil
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 /*
@@ -69,5 +70,16 @@ func TestIsEmail(t *testing.T) {
 	s = IsEmail("@example.com")
 	assert.Equal(t, s, false)
 	s = IsEmail("")
+	assert.Equal(t, s, false)
+}
+
+func TestIsAllInvisibleOrSpace(t *testing.T) {
+	s := IsAllInvisibleOrSpace(" ")
+	assert.Equal(t, s, true)
+	s = IsAllInvisibleOrSpace("")
+	assert.Equal(t, s, true)
+	s = IsAllInvisibleOrSpace("a")
+	assert.Equal(t, s, false)
+	s = IsAllInvisibleOrSpace("a ")
 	assert.Equal(t, s, false)
 }
