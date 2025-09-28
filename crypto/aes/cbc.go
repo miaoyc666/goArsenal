@@ -10,7 +10,7 @@ File name    : cbc.go
 Create time  : 2024/7/11 12:47
 Update time  : 2024/7/11 12:47
 Author       : miaoyc
-Description  :
+Description  : cbc加解密实现
 */
 
 // CbcEncrypt cbc加密，padFunc表示填充函数，可传入PKCS7Padding、ZeroPadding或其他符合格式的填充函数

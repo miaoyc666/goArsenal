@@ -4,8 +4,9 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/miaoyc666/goArsenal/crypto"
 	"github.com/stretchr/testify/assert"
+
+	"github.com/miaoyc666/goArsenal/crypto"
 )
 
 /*
