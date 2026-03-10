@@ -115,16 +115,14 @@ func IsIp(ip string) (bool, string) {
 	return false, ""
 }
 
-// isValidIPv4 检查是否为有效的 IPv4 地址
-// 这是 IsIP 函数的简化版本，仅用于内部 IP 提取逻辑
-func isValidIPv4(ip string) bool {
+// IsValidIPv4 检查是否为有效的 IPv4 地址
+func IsValidIPv4(ip string) bool {
 	isValid, ipType := IsIP(ip)
 	return isValid && ipType == "ipv4"
 }
 
-// isValidIPv6 检查是否为有效的 IPv6 地址
-// 这是 IsIP 函数的简化版本，仅用于内部 IP 提取逻辑
-func isValidIPv6(ip string) bool {
+// IsValidIPv6 检查是否为有效的 IPv6 地址
+func IsValidIPv6(ip string) bool {
 	isValid, ipType := IsIP(ip)
 	return isValid && ipType == "ipv6"
 }
